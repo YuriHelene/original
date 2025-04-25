@@ -1,7 +1,10 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  # ログインしないと投稿を見れなくする仕組み
 
   def index
+    @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc)
+
     # 教材7-2
     # @tweets = Tweet.all
     # search = params[:search]
@@ -10,9 +13,17 @@ class TweetsController < ApplicationController
       @tweets = Tweet.where("body LIKE ?", "%" + params[:search] + "%")
     else
       @tweets = Tweet.all
+
+    @tweets = case params[:sort]
+              when 'old'
+                Tweet.oldest
+              when 'likes'
+                Tweet.most_liked
+              else
+                Tweet.latest
+              end
     end
 
-    @tweets = Tweet.includes(:user).order(created_at: :desc)
     # 4/11追加
     @tweets = @tweets.page(params[:page]).per(4)
     # ページネーション
@@ -61,7 +72,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:body, :image, tag_ids: [])
+    params.require(:tweet).permit(:title, :body, :image, tag_ids: [])
   end
 
 end

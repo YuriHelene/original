@@ -1,0 +1,63 @@
+* {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+/* .main-box{
+    background-color: #4996e94a; 
+} */
+h3 {
+    white-space: nowrap;
+    position: center;
+    width: 100px;
+    margin: 30px auto;
+    text-align: center;
+}
+.button-search:hover {
+    box-shadow    : none;        /* カーソル時の影消去 */
+    color         : rgba(77, 166, 255, 0.99);     /* 背景色     */
+    background    : #ffffff;     /* 文字色     */
+}
+/* h4{
+    background-color: rgba(73, 150, 233, 0.29);
+} */
+.sort-form{
+    margin-bottom: 20px;
+}
+.tweet {
+    border-top: solid #00acee;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+.tweets-container {
+    display: flex;
+    flex-wrap: wrap;/* 折り返しを許可 */
+    gap: 20px; /* 投稿間の余白 */
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top:20px;
+    padding-bottom:20px;
+    background-color: rgba(73, 150, 233, 0.29);
+}
+.tweet-card {
+    width: 48%;
+       /* 2つ並ぶように幅を調整（50%  - gap） */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.top-btn {
+    position:   fixed;
+    right:      30px;
+    bottom:     40px;
+    width: 50px;
+    height: 50px;
+}
+.top-btn a {
+    width:      50px;
+    height:     50px;
+}
+

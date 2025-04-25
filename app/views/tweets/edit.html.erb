@@ -1,6 +1,8 @@
+<%= stylesheet_link_tag 'edit', :media => "all" %>
 <h3>投稿編集</h3>
 
 <%= form_for @tweet do |f| %>
+  <%= f.label :title %>
   <%= f.label :body %>
   <%= f.text_field :body, :size => 140 %> 
 

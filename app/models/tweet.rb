@@ -12,4 +12,12 @@ class Tweet < ApplicationRecord
   #tweetsテーブルから中間テーブルを介してTagsテーブルへの関連付け
   has_many :tags, through: :tweet_tag_relations, dependent: :destroy
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :oldest, -> {order(created_at: :asc)}
+  scope :most_liked, -> {
+    left_joins(:likes)
+    .group(:id)
+    .order('COUNT(likes.id) DESC')
+  }
+
 end

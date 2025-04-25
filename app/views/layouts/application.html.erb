@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Original</title>
+<html lang="ja">
+    <head>
+    <title>Le ciel dans La vie</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,30 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= link_to 'Le ciel dans La vie', hello_top_path %></h1>
+      <div class="header-list">
+      <ul>
+        <li><%= link_to '投稿一覧', tweets_path %></li>
+        <li><%= link_to '新規投稿', new_tweet_path %></li>
+
+        <% if user_signed_in? %>
+          <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+        <%# <li><%= link_to "マイページ", user_path(current_user.id) %></li> 
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+          <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <% end %>  
+      </ul>
+      </div>
+      </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>Copyright © helene All Rights Reserved.</p>
+    </footer>
+
   </body>
 </html>

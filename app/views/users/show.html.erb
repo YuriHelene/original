@@ -4,7 +4,9 @@
 <p>プロフィール : <%= @user.profile %></p>
 
 <% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
+  <div class="edit"> 
+    <%= link_to "編集する", edit_user_registration_path %>
+  </div>
 <% end %>
 
 <h2>ユーザーの投稿一覧</h2>
@@ -22,4 +24,6 @@
 <%# <% end %>
 <!-- ここまで-->
 
-<%= link_to "Tweet一覧に戻る", tweets_path %>
+<%= link_to "投稿一覧に戻る", tweets_path %>
+
+<h2>いいねした投稿</h2>

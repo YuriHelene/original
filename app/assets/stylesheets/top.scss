@@ -1,0 +1,29 @@
+.top-visual {
+    background-image: image-url('top_bg_sora1.jpg'); /* 画像のパス */
+    background-size: cover;        /* 全体に広げる */
+    background-position: center;   /* 中央に表示 */
+    height: 350px;                 /* 表示する高さ */
+    width: 100%;
+    margin-top: 0;
+    margin-bottom:0;
+}
+.catch-copy{
+    color:bisque;
+    position: center;
+    align-items: center;
+}
+.square{
+    height:10px;
+    white-space: nowrap;  // 改行を許さない
+    position: center;
+    align-items: center;
+}
+.container{
+    padding-top: 50px;
+    gap: 20px; /* 投稿間の余白 */
+    margin-top: 20px;
+}
+.main-content {
+    background-color: #4996e94a; /* 投稿と同じ色に！ */
+    min-height: 100vh; /* 画面全体を覆う */
+}

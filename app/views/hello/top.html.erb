@@ -1,21 +1,34 @@
-Le ciel dans la vie
-<%= link_to "ログイン", tweets_path %>
-<%= link_to "新規登録", new_user_registration_path %>
-<%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %>
-<%= link_to '投稿ページへ', :controller => "tweets", :action => "new" %>
+<%# Le ciel dans la vie
+<%= link_to "ログイン", new_user_session_path %>
+<%# <%= link_to "新規登録", new_user_registration_path %>
+<%# <%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %> 
+<%# <%= link_to '投稿ページへ', :controller => "tweets", :action => "new" %> 
+
+<%= stylesheet_link_tag 'top', :media => "all" %>
+
+<div class="top-visual" style="background-image: url(<%= asset_path('top_bg_sora1.jpg') %>); height: 300px; background-size: cover; background-position: center;">
+  <div class="catch-copy">
+    <h2>Le ciel dans La Vie</h2>
+    <p>あなたの人生に空を</p>
+  </div>
+</div>
 
 <div class="square">
   <h3 class="text-center">新着投稿</h3>
 </div>
   
+<div class="main-content">
 <div class="container mt-3">
   <div class="row">
     <% @new_tweets.each do |tweet| %>
       <div class="card-body">
       <h6 class="list-group-item"><%= tweet.created_at.strftime('%Y/%m/%d %H時%M分') %></h6>
       <h6 class="list-group-item"><%= tweet.body.truncate(100) %></h6>
-      <h6 class="list-group-item"><%= link_to"投稿一覧へ",tweets_path %></h6>
+      <%# <h6 class="list-group-item"><%= link_to"投稿一覧へ",tweets_path %></h6>
+      <h6><%= link_to "投稿詳細へ", tweet_path(tweet.id) %> </h6>
       </div>
     <% end %>
   </div>
+</div>
+
 </div>

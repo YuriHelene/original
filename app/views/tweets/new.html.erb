@@ -1,10 +1,14 @@
 <%# 投稿ページ %>
-<h1>Le Ciel Dans La Vie</h1>
-<h3>新規Tweet</h3>
+<%= stylesheet_link_tag 'new', :media => "all" %>
+
+<div class="post-container">
+<h3>新規投稿</h3>
 <%= form_for @tweet do |f| %>
   <div class="field">
-    <%= f.label :body %>
-    <%= f.text_field :body, :size => 140 %>
+    <p><%= f.label :"タイトル" %></p>
+    <%= f.text_field :title, class: "input-title", size: 140 %>
+    <p><%= f.label :"↓投稿内容↓" %></p>
+    <%= f.text_field :body, class: "input-body", size: 140 %>
   </div>
 
   <div class="field">
@@ -22,8 +26,9 @@
           </div>
       <% end %>
   </div>
-  
-  <%= f.submit "Tweetする" %>
+ <%= f.submit "投稿する", class: "button" %>
+
 <% end %>
 <%= link_to 'トップページへ', :controller => "hello", :action => "top" %>
 <%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %>
+</div>

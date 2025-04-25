@@ -1,32 +1,48 @@
 <%# 投稿一覧ページ %>
-<h1>Le Ciel Dans La Vie</h1>
+<%= stylesheet_link_tag 'index', :media => "all" %>
 
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
-<h3>Tweet一覧</h3>
+<%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
+<h3>投稿一覧</h3>
 
-<% if user_signed_in? %>
-  <%= link_to "マイページへ", user_path(current_user.id) %>
-<% end %>
+<%# <% if user_signed_in? %>
+  <%# <%= link_to "マイページへ", user_path(current_user.id) %>
+<%# <% end %>
 
-<h3>投稿を検索</h3>
-  <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+<%# <h4>投稿を検索</h4> %>
+<%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
   <%= text_field_tag :search %>
-  <%= submit_tag '検索する'  %>
+  <%= submit_tag '検索する' ,class: "button-search" %>
 <% end %>
 
-<%= link_to "新規投稿へ", tweets_new_path %>
+<div class="sort-form">
+  <%= form_with url: tweets_path, method: :get, local: true do %>
+    <label for="sort">並び替え：</label>
+    <%= select_tag :sort,
+        options_for_select([
+          ['新しい順', 'new'],
+          ['古い順', 'old'],
+          ['いいね順', 'likes']
+        ], selected: params[:sort]),
+        onchange: 'this.form.submit();' %>
+  <% end %>
+</div>
 
-<div class="tweets-container">
-  <% @tweets.each do |t| %>
-    <div class="tweet">
+<div class="main-box">
+  <div class="left-container">
+  <div class="tweets-container">
+    <% @tweets.each do |t| %>
+    <div class="tweet-card">
 
       <% if t.image.attached? %>
-            <%= image_tag t.image, size: '250x200'%>
-        <% end %>
+        <%= image_tag t.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
+        <%# 4/19 16:32 エラー解消のため %>
+            <%# <%= image_tag t.image, size: '250x200'%>
+      <% end %>
 
-      <%= t.body %>
+      <p><%= t.title %></p>
+      <p><%= t.body %></p>
 
-<% if user_signed_in? %>
+    <% if user_signed_in? %>
       <% if current_user.already_liked?(t) %>
           <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
               <p>いいねを取り消す</p><%= t.likes.count %>
@@ -37,9 +53,9 @@
         <% end %>
       <% end %>
   <% else %>
-      <p>いいねの数 = </p><%= t.likes.count %>
+      <p>いいねの数 = <%= t.likes.count %></p>
   <% end %>
-
+    
       <%= link_to t.user.name, user_path(t.user.id) %>
       <%# <%= t.user.email %> 
       <%= t.created_at %>
@@ -47,15 +63,22 @@
       
       <% if user_signed_in? && current_user.id == t.user_id %>
       <%= link_to "編集する", edit_tweet_path(t.id) %>
-      <%= link_to "削除する", tweet_path(t.id), method: :delete %>
+      <%= link_to "削除する", tweet_path(t.id), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false } %>
+      <%# <%= link_to "削除する", tweet_path(t.id), method: :delete %> 
       <%# <%= link_to "削除する", tweet_path(t.id), data: { turbo_method: :delete } %> 
     <% end %> 
-    
   </div>
   <% end %>
+  </div>
+  </div>
 
-<%= page_entries_info @tweets %>
+<%# <%= page_entries_info @tweets %> 
 <%= paginate @tweets %>
 
+<span id="top-btn">
+    <a href="#">
+      <%= image_tag asset_path('top.btn.png'), class: 'top-btn' %>
+    </a>
+</span>
+<%# ページ上部に戻るボタン %>
 </div>
-

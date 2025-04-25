@@ -1,11 +1,11 @@
 <%# 投稿詳細ページ %>
-<h1>Le Ciel Dans La Vie</h1>
+<%= stylesheet_link_tag 'show', :media => "all" %>
 
-<% if user_signed_in? %>
-  <%= link_to "マイページへ", user_path(current_user.id) %>
-<% end %>
+<%# <% if user_signed_in? %>
+  <%# <%= link_to "マイページへ", user_path(current_user.id) %> 
+<%# <% end %>
 
-<h2>Tweet詳細</h2>
+<h2>投稿詳細</h2>
 <div class="tweet">
   <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
 
@@ -13,12 +13,20 @@
     <span><%= tag.name %></span>
 <% end %>
 
-<% if t.image.attached? %>
-  <%= image_tag t.image, size: '250x200' %>
+<% if @tweet.image.attached? %>
+  <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
 <% end %>
 
+  <h2><%= @tweet.title %></h2>
   <p><%= @tweet.body %></p>
   <p><%= @tweet.created_at %></p>
+
+<% if user_signed_in? && current_user.id == @tweet.user_id %>
+    <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+    <%= link_to "削除する", tweet_path(@tweet.id), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false } %>
+    <%# <%= link_to "削除する", tweet_path(@tweet.id), method: :delete %> 
+      <%# <%= link_to "削除する", tweet_path(@tweet.id), data: { turbo_method: :delete } %> 
+<% end %> 
 
   <% if user_signed_in? %>
       <% if current_user.already_liked?(@tweet) %>
@@ -33,7 +41,6 @@
       <p>いいねの数 = </p><%= @tweet.likes.count %>
     <% end %>
 
-<%= link_to "編集する", edit_tweet_path(@tweet.id) %>
 </div>
 
 <h3>いいねしたユーザー</h3>
@@ -62,5 +69,5 @@
   <% end %>
 </div>
 
-<%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
-<%= link_to "投稿一覧に戻る", tweets_path %>
+<%# <%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
+<%# <%= link_to "投稿一覧に戻る", tweets_path %> 

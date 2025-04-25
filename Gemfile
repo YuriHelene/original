@@ -72,3 +72,4 @@ gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
 gem 'kaminari'
+gem 'sass-rails'
