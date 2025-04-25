@@ -1,0 +1,29 @@
+<%# 投稿ページ %>
+<h1>Le Ciel Dans La Vie</h1>
+<h3>新規Tweet</h3>
+<%= form_for @tweet do |f| %>
+  <div class="field">
+    <%= f.label :body %>
+    <%= f.text_field :body, :size => 140 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class='form-group'>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+          <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
+                  <%= tag.text %>
+              <% end %>
+          </div>
+      <% end %>
+  </div>
+  
+  <%= f.submit "Tweetする" %>
+<% end %>
+<%= link_to 'トップページへ', :controller => "hello", :action => "top" %>
+<%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %>

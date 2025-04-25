@@ -1,0 +1,66 @@
+<%# 投稿詳細ページ %>
+<h1>Le Ciel Dans La Vie</h1>
+
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
+
+<h2>Tweet詳細</h2>
+<div class="tweet">
+  <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
+
+<% @tweet.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>
+
+<% if t.image.attached? %>
+  <%= image_tag t.image, size: '250x200' %>
+<% end %>
+
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.created_at %></p>
+
+  <% if user_signed_in? %>
+      <% if current_user.already_liked?(@tweet) %>
+        <%= button_to tweet_like_path(@tweet), method: :delete do %>          <p>いいねを取り消す</p><%= @tweet.likes.count %>
+        <% end %>
+      <% else %>
+        <%= button_to tweet_likes_path(@tweet), method: :post do %>
+          <p>いいね</p><%= @tweet.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>いいねの数 = </p><%= @tweet.likes.count %>
+    <% end %>
+
+<%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+</div>
+
+<h3>いいねしたユーザー</h3>
+<% @tweet.liked_users.each do |user| %>
+  <li><%= user.name %></li>
+<% end %>
+
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.name unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
+<%= link_to "投稿一覧に戻る", tweets_path %>

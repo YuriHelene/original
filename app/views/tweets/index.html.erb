@@ -1,0 +1,61 @@
+<%# 投稿一覧ページ %>
+<h1>Le Ciel Dans La Vie</h1>
+
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
+<h3>Tweet一覧</h3>
+
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
+
+<h3>投稿を検索</h3>
+  <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag '検索する'  %>
+<% end %>
+
+<%= link_to "新規投稿へ", tweets_new_path %>
+
+<div class="tweets-container">
+  <% @tweets.each do |t| %>
+    <div class="tweet">
+
+      <% if t.image.attached? %>
+            <%= image_tag t.image, size: '250x200'%>
+        <% end %>
+
+      <%= t.body %>
+
+<% if user_signed_in? %>
+      <% if current_user.already_liked?(t) %>
+          <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+              <p>いいねを取り消す</p><%= t.likes.count %>
+          <% end %>
+        <% else %>
+          <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+              <p>いいね</p><%= t.likes.count %>
+        <% end %>
+      <% end %>
+  <% else %>
+      <p>いいねの数 = </p><%= t.likes.count %>
+  <% end %>
+
+      <%= link_to t.user.name, user_path(t.user.id) %>
+      <%# <%= t.user.email %> 
+      <%= t.created_at %>
+      <%= link_to "投稿詳細へ", tweet_path(t.id) %> 
+      
+      <% if user_signed_in? && current_user.id == t.user_id %>
+      <%= link_to "編集する", edit_tweet_path(t.id) %>
+      <%= link_to "削除する", tweet_path(t.id), method: :delete %>
+      <%# <%= link_to "削除する", tweet_path(t.id), data: { turbo_method: :delete } %> 
+    <% end %> 
+    
+  </div>
+  <% end %>
+
+<%= page_entries_info @tweets %>
+<%= paginate @tweets %>
+
+</div>
+
