@@ -39,17 +39,21 @@
             <%# <%= image_tag t.image, size: '250x200'%>
       <% end %>
 
-      <p><%= t.title %></p>
+      <b><%= t.title %></b>
       <p><%= t.body %></p>
 
     <% if user_signed_in? %>
       <% if current_user.already_liked?(t) %>
-          <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
-              <p>いいねを取り消す</p><%= t.likes.count %>
+          <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete,class: 'likes' do %>
+            <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
+              <%# <p>いいねを取り消す</p> %>
+              <%= t.likes.count %>
           <% end %>
         <% else %>
-          <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
-              <p>いいね</p><%= t.likes.count %>
+          <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post,class: 'likes' do %>
+            <%= image_tag asset_path('heart_pre.png'), class: 'heart_likes' %>
+              <%# <p>いいね</p> %>
+              <%= t.likes.count %>
         <% end %>
       <% end %>
   <% else %>

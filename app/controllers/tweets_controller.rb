@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
     end
 
     # 4/11追加
-    @tweets = @tweets.page(params[:page]).per(4)
+    @tweets = @tweets.page(params[:page]).per(20)
     # ページネーション
   end
 

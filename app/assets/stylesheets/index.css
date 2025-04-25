@@ -24,6 +24,9 @@ h3 {
 .sort-form{
     margin-bottom: 20px;
 }
+b{
+    font-size: 20px;
+}
 .tweet {
     border-top: solid #00acee;
     margin-top: 10px;
@@ -48,6 +51,20 @@ h3 {
     padding: 16px;
     box-sizing: border-box;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.likes{
+    border: none;
+    background-color: white;
+}
+.heart_likes {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
+}
+
+.heart_likes:hover {
+    transform: scale(1.1);
+
 }
 .top-btn {
     position:   fixed;

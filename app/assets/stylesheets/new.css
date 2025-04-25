@@ -45,8 +45,8 @@ input[type="submit"] {
     text-align    : center;      /* 文字位置   */
     cursor        : pointer;     /* カーソル   */
     padding       : 5px 40px;   /* 余白       */
-    background    : rgba(71, 141, 211, 0.99);     /* 背景色     */
     color         : #ffffff;     /* 文字色     */
+    background    : rgba(71, 141, 211, 0.99);     /* 背景色     */
     line-height   : 1em;         /* 1行の高さ  */
     transition    : .3s;         /* なめらか変化 */
     box-shadow    : 1px 1px #666666;  /* 影の設定 */
@@ -54,6 +54,6 @@ input[type="submit"] {
 }
 .button:hover {
     box-shadow    : none;        /* カーソル時の影消去 */
-    color         : rgba(77, 166, 255, 0.99);     /* 背景色     */
     background    : #ffffff;     /* 文字色     */
+    color         : rgba(77, 166, 255, 0.99);     /* 背景色     */
 }
