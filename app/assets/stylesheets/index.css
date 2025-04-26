@@ -6,6 +6,9 @@
 /* .main-box{
     background-color: #4996e94a; 
 } */
+/* .else{
+    background-color:#FFC666;
+} */
 h3 {
     white-space: nowrap;
     position: center;
@@ -36,10 +39,9 @@ b{
     display: flex;
     flex-wrap: wrap;/* 折り返しを許可 */
     gap: 20px; /* 投稿間の余白 */
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 20px;
-    padding-top:20px;
-    padding-bottom:20px;
+    padding:20px;
     background-color: rgba(73, 150, 233, 0.29);
 }
 .tweet-card {

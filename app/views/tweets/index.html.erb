@@ -2,6 +2,7 @@
 <%= stylesheet_link_tag 'index', :media => "all" %>
 
 <%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
+<div class=else>
 <h3>投稿一覧</h3>
 
 <%# <% if user_signed_in? %>
@@ -25,6 +26,7 @@
         ], selected: params[:sort]),
         onchange: 'this.form.submit();' %>
   <% end %>
+</div>
 </div>
 
 <div class="main-box">
