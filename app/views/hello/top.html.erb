@@ -8,7 +8,7 @@
 
 <div class="top-visual" style="background-image: url(<%= asset_path('top_bg_sora1.jpg') %>);">
   <div class="catch-copy">
-    <h2>Le ciel dans La Vie</h2>
+    <h2>Le ciel dans votre vie</h2>
     <p>あなたの人生に空を</p>
   </div>
 </div>
@@ -21,13 +21,17 @@
 <div class="container mt-3">
   <div class="row">
     <% @new_tweets.each do |tweet| %>
-      <div class="card-body">
-        <h6 class="list-group-item"><%= tweet.created_at.strftime('%Y/%m/%d %H時%M分') %></h6>
+      <%# <div class="card-body"> %>
+      <div class="col-md-4 mb-4">
+        <div class="tweet-card p-3 shadow-sm">
+          <h6 class="text-muted"><%= tweet.created_at.strftime('%Y/%m/%d %H時%M分') %></h6>
         <%# <h6 class="list-group-item"><%= tweet.body.truncate(100)</h6> %>
       <%# <h6 class="list-group-item"><%= link_to"投稿一覧へ",tweets_path %></h6>
-        <p><%= tweet.body.truncate(100) %></p>
-      <div class="text-end">
-      <%= link_to "投稿詳細へ", tweet_path(tweet.id),class:"btn_show" %>
+          <b><%= tweet.title%></p>
+          <p><%= tweet.body.truncate(100) %></p>
+        <div class="text-end">
+          <%= link_to "投稿詳細へ", tweet_path(tweet.id),class:"btn btn-outline-primary btn-sm" %>
+        </div>
       </div>
       </div>
     <% end %>
