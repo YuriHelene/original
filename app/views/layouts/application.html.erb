@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-    <title>Le ciel dans La vie</title>
+    <title>Le ciel dans votre vie</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,7 +12,12 @@
 
   <body>
     <header>
-      <h1><%= link_to 'Le ciel dans La vie', hello_top_path %></h1>
+      <div class="logo-area">
+        <%= link_to root_path do %>
+          <%= image_tag 'ciel_logo1.png', alt: 'Le ciel dans votre vie', class: 'site-logo' %>
+        <% end %>
+        <h1><%= link_to 'Le ciel dans votre vie', hello_top_path %></h1>
+      </div>
       <div class="header-list">
       <ul>
         <li><%= link_to '投稿一覧', tweets_path %></li>
