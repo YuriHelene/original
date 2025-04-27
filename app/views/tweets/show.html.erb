@@ -18,7 +18,7 @@
 <% end %>
 
   <h2><%= @tweet.title %></h2>
-  <p><%= @tweet.body %></p>
+  <p><%= simple_format(@tweet.body) %></p>
   <p><%= @tweet.created_at %></p>
 
 <% if user_signed_in? && current_user.id == @tweet.user_id %>

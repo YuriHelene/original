@@ -8,11 +8,8 @@
     <p><%= f.label :"タイトル" %></p>
     <%= f.text_field :title, class: "input-title", size: 140 %>
     <p><%= f.label :"↓投稿内容↓" %></p>
-    <%= f.text_field :body, class: "input-body", size: 140 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image %>
+    <%= f.text_area :body, class: "input-body", size: 140 %>
+    <p><%= f.label :画像 %></p>
     <%= f.file_field :image %>
   </div>
 

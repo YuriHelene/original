@@ -35,14 +35,13 @@
     <% @tweets.each do |t| %>
     <div class="tweet-card">
 
+  <b><%= t.title %></b>
+  <p><%= simple_format(t.body) %></p>
       <% if t.image.attached? %>
         <%= image_tag t.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
         <%# 4/19 16:32 エラー解消のため %>
             <%# <%= image_tag t.image, size: '250x200'%>
       <% end %>
-
-      <b><%= t.title %></b>
-      <p><%= t.body %></p>
 
     <% if user_signed_in? %>
       <% if current_user.already_liked?(t) %>
