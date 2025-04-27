@@ -1,7 +1,8 @@
 <%= stylesheet_link_tag 'users_show', :media => "all" %>
 
-<h1>投稿者プロフィール</h1>
+<h1>マイページ</h1>
 <section class="profile">
+<h2>投稿者プロフィール</h2>
 <p>名前 : <%= @user.name %></p>
 <p>メールアドレス : <%= @user.email %></p>
 <p>プロフィール : <%= @user.profile %></p>
@@ -14,15 +15,19 @@
 
 <section class="tweets">
   <h2>ユーザーの投稿一覧</h2>
-<% @user.tweets.each do |t| %>
+<% @tweets.each do |t| %>
   <div class="tweet">
     <p><strong><%= t.user.name %>さんの投稿：</strong></p>
+    <b><%= t.title %></b>
     <p><%= t.body %></p>
     <% if t.image.attached? %>
       <%= image_tag t.image, class: "tweet-image" %>
     <% end %>
+          <%= link_to "投稿詳細へ", tweet_path(t.id) %> 
   </div>
 <% end %>
+<%= page_entries_info @tweets %>
+<%= paginate @tweets, param_name: :page %>  <!-- ← param_nameを指定 -->
 </section>
 
 <!-- 以下はいいね機能を実装している場合-->
@@ -35,6 +40,19 @@
 
 <%= button_to "投稿一覧に戻る", tweets_path %>
 
-<section class="like">
+<section class="likes">
 <h2>いいねした投稿</h2>
+<%# <% @likes.each do |t| %> 
+<% @liked_tweets.each do |t| %>
+  <div class="liked-tweet">
+    <p><strong><%= t.user.name %>さんの投稿：</strong></p>
+    <b><%= t.title %></b>
+    <p><%= t.body %></p>
+    <% if t.image.attached? %>
+      <%= image_tag t.image, class: "liked-tweets-image" %>
+    <% end %>
+  </div>
+<% end %>
+<%= page_entries_info @liked_tweets %>
+<%= paginate @liked_tweets, param_name: :liked_page %>  <!-- ← ここもparam_nameを指定！ -->
 </section>
