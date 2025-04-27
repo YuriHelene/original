@@ -1,13 +1,14 @@
 <%= stylesheet_link_tag 'edit', :media => "all" %>
 <h3>投稿編集</h3>
 
+<div class="post-container">
 <%= form_for @tweet do |f| %>
-  <%= f.label :title %>
-  <%= f.label :body %>
-  <%= f.text_field :body, :size => 140 %> 
-
-  <div class="field">
-    <%= f.label :image %>
+<div class="field">
+  <h2><%= f.label :タイトル %></h2>
+  <%= f.text_field :title,class: "input-title", :size => 140 %> 
+  <h2><%= f.label :投稿内容 %></h2>
+  <%= f.text_area :body, class: "input-body", :size => 140 %> 
+  <h2><%= f.label :画像 %></h2>
     <%= f.file_field :image %>
   </div>
 <%# <% end %> 
@@ -26,3 +27,4 @@
 
   <%= f.submit "編集する" %>
 <% end %>
+</div>
