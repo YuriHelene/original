@@ -63,7 +63,7 @@
     
       <%= link_to t.user.name, user_path(t.user.id) %>
       <%# <%= t.user.email %> 
-      <%= t.created_at %>
+      <%= t.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
       <%= link_to "投稿詳細へ", tweet_path(t.id) %> 
       
       <% if user_signed_in? && current_user.id == t.user_id %>
