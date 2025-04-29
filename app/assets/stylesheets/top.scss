@@ -1,7 +1,7 @@
 .top-visual {
     background-size: cover;
     background-position: center;
-    height: 350px;
+    height: 500px;
     width: 100%;
     margin: 0;
     display: flex;
@@ -26,38 +26,55 @@
 
 .square {
     height: 25px;
-    background: linear-gradient(to right,to left, #aee1f9, #d9f3ff);
+    background-color: #d7ecfd;
     padding: 20px;
     text-align: center;
     font-family: 'Noto Sans JP', sans-serif;
 }
 .text-center{
     justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 .main-content {
-    background-color: #f0f8ff;
+    background-color: #d7ecfd;
     padding-bottom: 50px;
 }
 
 .container {
     padding-top: 30px;
+    max-width: 100%; 
+    margin: 0 auto;
+}
+
+.tweets-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* 2列で折り返す */
+  justify-content: center; /* 両端に広げる */
+  gap: 30px; /* カード同士の間隔 */
+}
+
+.tweet-card-link{
+  text-decoration: none; /* 下線を消す */
+  color: inherit; /* テキストの色もそのまま */
+  display: block; /* aタグをブロックにしてdivと同じ扱いに */
 }
 
 .tweet-card {
-    background: #ffffff;
-    border-radius: 15px;
-    transition: transform 0.3s ease;
-    
-    &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(73, 150, 233, 0.2);
-    }
+  background: #ffffff;
+  border-radius: 90px;
+  transition: transform 0.3s ease;
+  width: 45%; /* カードの幅を45%くらいに */
+  min-width: 300px; /* 小さすぎないように最小幅を設定 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-.text-center {
-    font-weight: bold;
-    font-size: 1.5rem;
+.tweet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(73, 150, 233, 0.2);
 }
+
 
 .btn-outline-primary {
     font-size: 15px;
