@@ -18,22 +18,21 @@
 </section>
   
 <section class="main-content">
-<div class="container mt-3">
-  <div class="row">
+<div class="container">
+  <div class="tweets-wrapper">
     <% @new_tweets.each do |tweet| %>
-      <%# <div class="card-body"> %>
-      <div class="col-md-4 mb-4">
-        <div class="tweet-card p-3 shadow-sm">
-          <h6 class="text-muted"><%= tweet.created_at.strftime('%Y/%m/%d %H時%M分') %></h6>
+    <%= link_to tweet_path(tweet.id), class: "tweet-card-link" do %>
+      <div class="tweet-card">
+        <h6 class="text-muted"><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></h6>
         <%# <h6 class="list-group-item"><%= tweet.body.truncate(100)</h6> %>
       <%# <h6 class="list-group-item"><%= link_to"投稿一覧へ",tweets_path %></h6>
-          <b><%= tweet.title%></p>
+          <b><%= tweet.title%></b>
           <p><%= tweet.body.truncate(100) %></p>
         <div class="text-end">
-          <%= link_to "投稿詳細へ", tweet_path(tweet.id),class:"btn btn-outline-primary btn-sm" %>
+          <%= link_to "投稿詳細へ", tweet_path(tweet.id),class:"btn btn-outline-primary" %>
         </div>
       </div>
-      </div>
+    <% end %>
     <% end %>
   </div>
 </div>
