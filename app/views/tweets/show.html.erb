@@ -19,7 +19,10 @@
 
   <h2><%= @tweet.title %></h2>
   <p><%= simple_format(@tweet.body) %></p>
-  <p><%= @tweet.created_at %></p>
+  <p>投稿日時<%= @tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
+<% if @tweet.created_at != @tweet.updated_at %>
+  <p>更新日時<%= @tweet.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
+<% end %>
 
 <% if user_signed_in? && current_user.id == @tweet.user_id %>
     <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
@@ -30,7 +33,9 @@
 
   <% if user_signed_in? %>
       <% if current_user.already_liked?(@tweet) %>
-        <%= button_to tweet_like_path(@tweet), method: :delete do %>          <p>いいねを取り消す</p><%= @tweet.likes.count %>
+        <%= button_to tweet_like_path(@tweet), method: :delete do %>
+          <%# <p>いいねを取り消す %>
+          </p><%= @tweet.likes.count %>
         <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
       <% end %>
       <% else %>
@@ -41,7 +46,8 @@
         <% end %>
   <% end %>
     <% else %>
-      <p>いいねの数 = </p><%= @tweet.likes.count %>
+      <%# <p>いいねの数 = </p> %>
+      <%= @tweet.likes.count %>
     <% end %>
 
 </div>
