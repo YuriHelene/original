@@ -59,7 +59,7 @@ class TweetsController < ApplicationController
     if tweet.update(tweet_params)
       redirect_to :action => "show", :id => tweet.id
     else
-      redirect_to :action => "new"
+      redirect_to :action => "edit"
     end
   end
 

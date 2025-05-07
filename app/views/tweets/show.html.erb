@@ -26,11 +26,13 @@
 
 <% if user_signed_in? && current_user.id == @tweet.user_id %>
     <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
-    <%= link_to "削除する", tweet_path(@tweet.id), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false } %>
+    <%= button_to "削除する", tweet_path(@tweet), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    <%# <%= link_to "削除する", tweet_path(@tweet.id), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false } %>
     <%# <%= link_to "削除する", tweet_path(@tweet.id), method: :delete %> 
       <%# <%= link_to "削除する", tweet_path(@tweet.id), data: { turbo_method: :delete } %> 
 <% end %> 
 
+<div class="like">
   <% if user_signed_in? %>
       <% if current_user.already_liked?(@tweet) %>
         <%= button_to tweet_like_path(@tweet), method: :delete do %>
