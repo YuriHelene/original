@@ -3,7 +3,7 @@
     background-position: center;
     height: 500px;
     width: 100%;
-    margin: 0;
+    margin-top: -20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,7 @@
 .tweets-wrapper {
   display: flex;
   flex-wrap: wrap; /* 2列で折り返す */
-  justify-content: center; /* 両端に広げる */
+  justify-content: center; /* 中心に集める */
   gap: 30px; /* カード同士の間隔 */
 }
 

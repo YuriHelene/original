@@ -64,9 +64,16 @@ b{
     max-height: 6em;        /* 1.5em × 4行 = 6em */
 }
 
-.likes{
+.likes {
     border: none;
-    background-color: white;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.likes form {
+    all: unset; /* formタグのスタイルをすべてリセット */
 }
 .heart_likes {
     width: 24px;
