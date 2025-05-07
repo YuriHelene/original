@@ -3,6 +3,14 @@
 <h1>マイページ</h1>
 <section class="profile">
 <h2>投稿者プロフィール</h2>
+  <div class="icon">
+    <% if @user.icon.attached? %>
+      <%= image_tag @user.icon.variant(resize_to_limit: [150, 150]) %>
+    <% else %>
+    <i class="fa-solid fa-rainbow"></i>
+      <%# <%= image_tag "default_icon.png", size: "150x150" %> <!-- デフォルト画像 --> 
+    <% end %>
+  </div>
 <p>名前 : <%= @user.name %></p>
 <p>メールアドレス : <%= @user.email %></p>
 <p>プロフィール : <%= @user.profile %></p>
@@ -14,10 +22,13 @@
 </section>
 
 <section class="tweets">
-  <h2>ユーザーの投稿一覧</h2>
+  <h2>あなたの投稿一覧</h2>
 <% @tweets.each do |t| %>
   <div class="tweet">
-    <p><strong><%= t.user.name %>さんの投稿：</strong></p>
+    <p><strong>
+      <%= t.created_at.strftime('%Y/%m/%d %Hh%Mm%Ss') %>：
+      <%# <%= t.user.nameさんの投稿： %>
+      </strong></p>
     <b><%= t.title %></b>
     <p><%= t.body %></p>
     <% if t.image.attached? %>

@@ -12,9 +12,23 @@ class User < ApplicationRecord
   has_many :liked_tweets, through: :likes, source: :tweet
 
   # has_many :tweets
+  has_one_attached :icon  # "icon" はアイコン画像の名前（任意）
 
   def already_liked?(tweet)  #すでにいいねをしているのか
     self.likes.exists?(tweet_id: tweet.id)
   end
 
+  def acceptable_icon
+    return unless icon.attached?
+  
+    # unless avatar.blob.byte_size <= 1.megabyte
+    #   errors.add(:avatar, "は1MB以下のファイルにしてください")
+    # end
+  
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(icon.content_type)
+      errors.add(:icon, "はJPEGまたはPNG形式のみ許可されています")
+    end
+  end
+  
 end
