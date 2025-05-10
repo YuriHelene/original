@@ -193,6 +193,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
+    pg (1.5.9)
+    pg (1.5.9-x64-mingw-ucrt)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -321,12 +323,13 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kaminari
+  pg
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
   sass-rails
   selenium-webdriver
   sprockets-rails
-  sqlite3 (>= 1.4)
+  sqlite3
   stimulus-rails
   turbo-rails
   tzinfo-data
