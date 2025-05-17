@@ -15,6 +15,22 @@
   <%= submit_tag '検索する' ,class: "button-search" %>
 <% end %>
 
+<h5>タグリスト</h5>
+<%# <% @hashtag_list.each do |list| %> 
+  <%# <%= link_to list.hashtag_name, hashtag_tweets_path(hashtag_id: list.id) %> 
+  <%# <%= "(#{list.tweets.count})" %> 
+<%# <% end %> 
+<%# <% @tweets.each do |tweet| %>  
+  <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %> 
+<%# <% end %> 
+
+<% @tweets.each do |tweet| %> 
+  <% tweet.hashtags.each do |hashtag| %>
+    <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
+  <% end %>
+<% end %>
+
+
 <div class="sort-form">
   <%= form_with url: tweets_path, method: :get, local: true do %>
     <label for="sort">並び替え：</label>

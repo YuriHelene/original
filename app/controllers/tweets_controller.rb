@@ -4,7 +4,8 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc)
-
+    # @hashtag_list = Hashtag.all              #ビューでタグ一覧を表示するために全取得。
+    @tweet_hashtags = Hashtag.includes(:tweets).all
     # 教材7-2
     # @tweets = Tweet.all
     # search = params[:search]
@@ -31,20 +32,33 @@ class TweetsController < ApplicationController
 
   def new
     @tweet = Tweet.new
+    # @tweet = current_user.tweet.new # ビューのform_withのmodelに使う。
   end
 
+  # def create
+  #   tweet = Tweet.new(tweet_params)
+  #   tweet.user_id = current_user.id 
+  #   if tweet.save
+  #     redirect_to :action => "index"
+  #   else
+  #     redirect_to :action => "new"
+  #   end
+  # end
+
   def create
-    tweet = Tweet.new(tweet_params)
-    tweet.user_id = current_user.id 
-    if tweet.save
-      redirect_to :action => "index"
+    @tweet = current_user.tweets.new(tweet_params)           
+    hashtag_list = params[:tweet][:hashtag_name].split(nil)  
+    if @tweet.save
+        @tweet.save_hashtag(hashtag_list)
+        redirect_to :action => "index"
     else
-      redirect_to :action => "new"
+        redirect_to :action => "new"
     end
   end
 
   def show
     @tweet = Tweet.find(params[:id])
+    @tweet_hashtags = @tweet.hashtags #そのクリックした投稿に紐付けられているタグの取得。
 
     @comments = @tweet.comments
     @comment = Comment.new
@@ -72,7 +86,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:title, :body, :image, tag_ids: [])
+    params.require(:tweet).permit(:title, :body, :image, :hashtag_name) #tag_ids: []
   end
 
 end

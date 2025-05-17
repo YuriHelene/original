@@ -6,3 +6,4 @@ class Post < ApplicationRecord
 # throughオプションを使う場合、先にその中間テーブルとの関連付けを行う必要がある。
 # 中間テーブルにdependent: :destroyオプションを付けることで、Postが削除されると同時にPostとTagの関係が削除される。
 end
+#これはtweetと同じでいらなかった

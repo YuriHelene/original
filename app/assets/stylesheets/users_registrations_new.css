@@ -1,0 +1,61 @@
+.blank1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    min-height: 88vh;  /* 画面全体の高さを埋める */
+    } 
+    
+.blank2{
+    text-align: center;
+    height: 400px;
+    width: 45%;
+    color: white;
+    background: #67a7e7;
+    border-radius: 180px;
+    margin: 20px 5px;
+    padding: 20px 40px;
+    } 
+.blank2 a{
+    color:#ffffff;
+    } 
+h2{
+    margin-top: 50px;
+    color: aliceblue;
+}
+.field label {
+    font-weight: 100;
+    font-size: 15px;
+    } 
+.field input[type="email"] {
+    border-style: none;
+    width: 250px;
+    height: 30px;
+    background: #9bccfe;
+    border-radius: 10px;
+    border: 1px #060339 solid;
+    } 
+    
+.field input[type="password"] {
+    border-style: none;
+    width: 250px;
+    height: 30px;
+    background: #9bccfe;
+    border-radius: 10px;
+    border: 1px #060339 solid;
+    } 
+    
+.actions input[type="submit"] {
+    border-style: none;
+    width: 150px;
+    height: 25px;
+    font-size: 15px;
+    background: #5ba2f4f3;
+    border-radius: 10px;
+    border: 1px #ebf0f9 solid;
+    } 
+    
+.actions input[type="submit"]:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom,#1c94ea,#5ba2f4f3);
+    }

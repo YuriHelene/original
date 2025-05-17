@@ -9,9 +9,9 @@
 <div class="tweet">
   <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
 
-<% @tweet.tags.each do |tag| %>
-    <span><%= tag.name %></span>
-<% end %>
+<%# <% @tweet.tags.each do |tag| %>
+    <%# <span><%= tag.name</span>  %>
+<%# <% end %> 
 
 <% if @tweet.image.attached? %>
   <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
@@ -23,6 +23,17 @@
 <% if @tweet.created_at != @tweet.updated_at %>
   <p>更新日時<%= @tweet.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
 <% end %>
+
+<% @tweet_hashtags.each do |hashtag| %>
+  <%# <% if hashtag.tweets.size > 0 %> 
+  <% tweet_count = hashtag.tweets.size %>
+  <% if tweet_count > 0 %>
+    <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
+    <%# <%= "(#{hashtag.tweets.count})" %>
+    <%= "(#{tweet_count})" %>
+  <% end %>
+<% end %>
+
 
 <% if user_signed_in? && current_user.id == @tweet.user_id %>
   <%= link_to edit_tweet_path(@tweet.id) do%>

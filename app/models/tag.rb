@@ -6,3 +6,4 @@ class Tag < ApplicationRecord
   #Tagsテーブルから中間テーブルを介してArticleテーブルへの関連付け
   has_many :tweets, through: :tweet_tag_relations, dependent: :destroy
 end
+#ハッシュタグに変えていらなくなった

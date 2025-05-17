@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'tweets/:id' => 'tweets#show',as: 'tweet' 
   # showはnewより後に書くこと！newがid扱いされてshow アクションに送られてしまう
   root 'hello#top'
+  # root 'tweets#index'
   post 'tweets' => 'tweets#create'
   patch 'tweets/:id' => 'tweets#update'
   delete 'tweets/:id' => 'tweets#destroy' 
