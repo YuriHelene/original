@@ -32,10 +32,10 @@
   <%# <% if hashtag.tweets.size > 0 %> 
   <% tweet_count = hashtag.tweets.size %>
   <% if tweet_count > 0 %>
-    <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
-    <%# <%= "(#{hashtag.tweets.count})" %>
-    <%= "(#{tweet_count})" %>
-  <% end %>
+    <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %> 
+    <%= "(#{hashtag.tweets.count})"%>
+    <%= "(#{tweet_count})" %> 
+  <% end %> 
 <% end %>
 
 

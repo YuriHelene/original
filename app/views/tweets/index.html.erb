@@ -26,7 +26,7 @@
 
 <% @tweets.each do |tweet| %> 
   <% tweet.hashtags.each do |hashtag| %>
-    <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
+    <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
   <% end %>
 <% end %>
 
