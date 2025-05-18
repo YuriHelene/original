@@ -31,11 +31,11 @@ class Tweet < ApplicationRecord
     new_hashtags = sent_hashtags - current_hashtags
 
     old_hashtags.each do |old|
-      self.hashtags.delete Hashag.find_by(hashtag_name: old)
+      self.hashtags.delete Hashtag.find_by(hashtag_name: old)
     end
 
     new_hashtags.each do |new|
-      new_tweet_hashtag = Hashag.find_or_create_by(hashtag_name: new)
+      new_tweet_hashtag = Hashtag.find_or_create_by(hashtag_name: new)
       self.hashtags << new_tweet_hashtag
     end
   end
