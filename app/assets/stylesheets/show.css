@@ -1,0 +1,24 @@
+.tweetshow {
+    display: flex;
+    justify-content: center;
+}
+.image{
+    padding-right: 200px;
+}
+.showlike-comment{
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* 箱同士の間隔 */
+    margin: 0 auto;
+    max-width: 800px; /* 中央寄せのための最大幅 */
+    padding: 20px;
+}
+.likeuser, .comment-wrapper {
+    background-color: azure;
+    border: 1px solid orange;
+    border-radius: 20px;
+    padding: 20px;
+    flex: 1; /* 横幅均等に */
+    max-height: 400px;         /* 高さ制限 */
+    overflow-y: auto;          /* 縦スクロール */
+}

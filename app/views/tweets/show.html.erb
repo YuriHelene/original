@@ -7,18 +7,22 @@
 
 <h2>投稿詳細</h2>
 <div class="tweet">
-  <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
-
+  <div class="tweetshow">
+    <div class="image">
+      <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
 <%# <% @tweet.tags.each do |tag| %>
     <%# <span><%= tag.name</span>  %>
 <%# <% end %> 
+      <% if @tweet.image.attached? %>
+        <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
+      <% end %>
+    </div>  
+    <div class="tweetbody">
+      <h2><%= @tweet.title %></h2>
+      <p><%= simple_format(@tweet.body) %></p>
+    </div>
+  </div>
 
-<% if @tweet.image.attached? %>
-  <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
-<% end %>
-
-  <h2><%= @tweet.title %></h2>
-  <p><%= simple_format(@tweet.body) %></p>
   <p>投稿日時<%= @tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
 <% if @tweet.created_at != @tweet.updated_at %>
   <p>更新日時<%= @tweet.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
@@ -44,7 +48,7 @@
   <% end %>
 <% end %>
 
-<div class="like">
+<div class="userlike-comment">
   <% if user_signed_in? %>
       <% if current_user.already_liked?(@tweet) %>
         <%= button_to tweet_like_path(@tweet), method: :delete do %>
@@ -58,32 +62,13 @@
         <%# <p>いいね</p> %>
         <%= @tweet.likes.count %>
         <% end %>
-  <% end %>
+      <% end %>
     <% else %>
       <%# <p>いいねの数 = </p> %>
       <%= @tweet.likes.count %>
     <% end %>
 
-</div>
-
-<h5>いいねしたユーザー</h5>
-<% @tweet.liked_users.each do |user| %>
-  <li><%= user.name %></li>
-<% end %>
-
-<div class="comment-wrapper">
-  <p>コメント一覧</p>
-  <% @comments.each do |c| %>
-    <div>
-      <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> 
-      <%# <%= c.user.name unless c.user.blank? %> 
-      <br>
-      <%= c.content %>
-    </div>
-      <br>
-  <% end %>
-
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
     <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
       <%= f.text_area :content %>
       <%= button_tag type: "submit" do %>
@@ -92,6 +77,28 @@
     <% end %>
   <% end %>
 </div>
+
+<div class="showlike-comment">
+  <div class="likeuser">
+      <h4>いいねしたユーザー</h4>
+      <% @tweet.liked_users.each do |user| %>
+        <li><%= user.name %></li>
+      <% end %>
+  </div>    
+
+  <div class="comment-wrapper">
+    <h4>コメント一覧</h4>
+    <% @comments.each do |c| %>
+      <div>
+        <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> 
+        <%# <%= c.user.name unless c.user.blank? %> 
+        <br>
+        <%= c.content %>
+      </div>
+        <br>
+    <% end %>
+  </div>
+</div>  
 
 <%# <%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
 <%# <%= link_to "投稿一覧に戻る", tweets_path %> 
