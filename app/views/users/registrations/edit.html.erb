@@ -1,68 +1,74 @@
-<h2><%= resource_name.to_s.humanize %>の編集</h2>
+<%= stylesheet_link_tag 'users_registrations_edit', :media => "all" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true, id: "icon_form" }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div class="blank1">
+  <div class="blank2">
+    <h2><%= @user.name %>の編集</h2>
 
-<!-- ▼この部分を追加：プロフィール画像アップロード＋Cropperプレビュー -->
-  <div class="field">
-    <%= f.label :icon, "プロフィール画像" %><br>
-    <%= f.file_field :icon, id: "icon_input" %>
-    <br>
-    <div>
-      <img id="icon_preview" style="max-width: 300px; border-radius: 50%; object-fit: cover;" />
-    </div>
-    <br>
-    <%= button_tag "トリミングして保存", id: "crop_and_upload", type: "button" %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true, id: "icon_form" }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+
+      <!-- ▼この部分を追加：プロフィール画像アップロード＋Cropperプレビュー -->
+        <div class="field">
+          <%= f.label :icon, "プロフィール画像" %><br>
+          <%= f.file_field :icon, id: "icon_input" %>
+          <br>
+          <div>
+            <img id="icon_preview" style="max-width: 300px; border-radius: 50%; object-fit: cover;" />
+          </div>
+          <br>
+          <%= button_tag "トリミングして保存", id: "crop_and_upload", type: "button" %>
+        </div>
+        <!-- ▲ここまで追加 -->
+
+      <!--アカウント編集時に名前を入力できるようにフォームを追加-->
+        <div class="field">
+          <%= f.label :名前 %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        </div>
+
+        <!--アカウント編集時にプロフィールを入力できるようにフォームを追加-->
+        <div class="field">
+          <%= f.label :プロフィール %><br />
+          <%= f.text_area :profile, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :メール %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :新しいパスワード %> <i>(変更しない場合は空欄のまま)</i><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <br />
+            <h5>*最小<%= @minimum_password_length %>文字</h5>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :新しいパスワードの確認 %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :現在のパスワード %> <i>(編集には現在のパスワードが必要です)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "更新する" %>
+        </div>
+      <% end %>
+
+      <%# <h3>Cancel my account</h3> %>
+
+      <div><%= button_to "アカウントを消去", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
+      <%= link_to "マイページに戻る", :back %>
   </div>
-  <!-- ▲ここまで追加 -->
-
- <!--アカウント編集時に名前を入力できるようにフォームを追加-->
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <!--アカウント編集時にプロフィールを入力できるようにフォームを追加-->
-  <div class="field">
-    <%= f.label :profile %><br />
-    <%= f.text_area :profile, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(変更しない場合は空欄のまま)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <h5>*最小<%= @minimum_password_length %>文字</h5>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワードの確認 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :現在のパスワード %> <i>(変更には現在のパスワードが必要です)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "更新する" %>
-  </div>
-<% end %>
-
-<%# <h3>Cancel my account</h3> %>
-
-<div><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

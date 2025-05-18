@@ -22,7 +22,7 @@
 </section>
 
 <section class="tweets">
-  <h2>あなたの投稿一覧</h2>
+  <h2><%= @user.name %>の投稿一覧</h2>
 <% @tweets.each do |t| %>
   <div class="tweet">
     <p><strong>
