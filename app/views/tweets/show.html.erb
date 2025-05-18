@@ -14,11 +14,8 @@
     <%# <span><%= tag.name</span>  %>
 <%# <% end %> 
       <% if @tweet.image.attached? %>
-        <%= image_tag url_for(@tweet.image), size: '250x200' %>
+        <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
       <% end %>
-<%# <% if @tweet.image.attached? %>
-  <%# <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]).processed, size: '250x200' %>
-<%# <% end %>
     </div>  
     <div class="tweetbody">
       <h2><%= @tweet.title %></h2>
@@ -90,7 +87,7 @@
   </div>    
 
   <div class="comment-wrapper">
-    <h4>コメント一覧</>
+    <h4>コメント一覧</h4>
     <% @comments.each do |c| %>
       <div>
         <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> 
