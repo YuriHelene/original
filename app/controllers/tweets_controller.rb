@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
     @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc)
     # @hashtag_list = Hashtag.all              #ビューでタグ一覧を表示するために全取得。
     @tweet_hashtags = Hashtag.includes(:tweets).all
-    # 教材7-2
+    @hashtag_list = Hashtag.joins(:tweets).group('hashtags.id').having('COUNT(tweets.id) > 0')    # 教材7-2
     # @tweets = Tweet.all
     # search = params[:search]
     # @tweets = @tweets.joins(:user).where("body LIKE ?", "%#{search}%") if search.present?
@@ -68,10 +68,17 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
   end
 
+  def hashtag
+    @hashtag = Hashtag.find(params[:id])
+    @tweets = @hashtag.tweets.includes(:user, :likes).order(created_at: :desc).page(params[:page]).per(20)
+  end
+
   def update
     tweet = Tweet.find(params[:id])
     if tweet.update(tweet_params)
-      redirect_to :action => "show", :id => tweet.id
+      hashtags = params[:tweet][:hashtag_name].split(" ")
+      tweet.save_hashtag(hashtags) 
+      redirect_to :action => "show", :id => tweet.id, notice: "投稿を更新しました"
     else
       redirect_to :action => "edit"
     end

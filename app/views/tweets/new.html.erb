@@ -25,7 +25,7 @@
   <%# </div> %>
 
   <%# <%= form_with(model: @tweet, url: tweets_path, local: true) do |f| %>
-    <p>スペースを入力することで複数のタグを付けることができます。</p>
+    <p>半角スペースを入力すると複数のタグを付けることができます。</p>
   <%= f.text_field :hashtag_name, placeholder: "夕焼け 虹 朝" %>
 
 <%= f.submit "投稿する", class: "button" %>

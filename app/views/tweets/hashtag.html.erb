@@ -1,0 +1,13 @@
+<h2>#<%= @hashtag.hashtag_name %> に関する投稿</h2>
+
+<% if @tweets.any? %>
+  <% @tweets.each do |tweet| %>
+    <div class="tweet">
+      <p><%= tweet.user.name %>：<%= tweet.body %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>このタグに紐づくツイートはありません。</p>
+<% end %>
+
+<%= paginate @tweets %>

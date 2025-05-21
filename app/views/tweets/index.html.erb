@@ -16,19 +16,19 @@
 <% end %>
 
 <h5>タグリスト</h5>
-<%# <% @hashtag_list.each do |list| %> 
-  <%# <%= link_to list.hashtag_name, hashtag_tweets_path(hashtag_id: list.id) %> 
-  <%# <%= "(#{list.tweets.count})" %> 
-<%# <% end %> 
-<%# <% @tweets.each do |tweet| %>  
-  <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %> 
-<%# <% end %> 
-
-<% @tweets.each do |tweet| %> 
-  <% tweet.hashtags.each do |hashtag| %>
+<% @hashtag_list.each do |list| %> 
+  <%= link_to "##{list.hashtag_name}", hashtag_tweets_path(list.id) %>
+    <%= "(#{list.tweets.count})" %> 
+  <% end %> 
+<%# <% @tweets.each do |tweet| %> 
     <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
-  <% end %>
-<% end %>
+<%# <% end %>
+
+<%# <% @tweets.each do |tweet| %> 
+  <%# <% tweet.hashtags.each do |hashtag| %>
+    <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
+  <%# <% end %>
+<%# <% end %>
 
 
 <div class="sort-form">
@@ -60,25 +60,29 @@
             <%# <%= image_tag t.image, size: '250x200'%>
       <% end %>
 
-      <% if user_signed_in? %>
+<div class="like-container">
+    <% if user_signed_in? %>
         <% if current_user.already_liked?(t) %>
           <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete,class: 'likes' do %>
             <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
               <%# <p>いいねを取り消す</p> %>
               <%= t.likes.count %>
-        <% end %>
+          <% end %>
         <% else %>
           <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post,class: 'likes' do %>
             <%= image_tag asset_path('heart_pre.png'), class: 'heart_likes' %>
               <%# <p>いいね</p> %>
               <%= t.likes.count %>
+          <% end %>
         <% end %>
-      <% end %>
       <% else %>
-        <p>            
-          <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %><%= t.likes.count %>
-        </p>
+        <!-- 非ログイン時は画像とカウントのみ表示 -->
+        <div class="likes guest">          
+          <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
+          <%= t.likes.count %>
+        </div>
       <% end %>
+
     
       <%= link_to t.user.name, user_path(t.user.id) %>
       <%# <%= t.user.email %> 

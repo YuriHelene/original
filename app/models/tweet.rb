@@ -1,5 +1,5 @@
 class Tweet < ApplicationRecord
-  attr_accessor :hashtag_name  # ← これを追加！
+  attr_accessor :hashtag_name  # ← 仮想属性！
 
   belongs_to :user
   has_one_attached :image

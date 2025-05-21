@@ -12,21 +12,24 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get 'hello/top' => 'hello#top'
-  get 'tweets' => 'tweets#index'
-  get 'tweets/new' => 'tweets#new'
-  get 'tweets/:id' => 'tweets#show',as: 'tweet' 
+  # get 'tweets' => 'tweets#index'
+  # get 'tweets/new' => 'tweets#new'
+  # get 'tweets/:id' => 'tweets#show',as: 'tweet' 
   # showはnewより後に書くこと！newがid扱いされてshow アクションに送られてしまう
   root 'hello#top'
   # root 'tweets#index'
-  post 'tweets' => 'tweets#create'
-  patch 'tweets/:id' => 'tweets#update'
-  delete 'tweets/:id' => 'tweets#destroy' 
-  get 'tweets/:id/edit' => 'tweets#edit', as:'edit_tweet'
+  # post 'tweets' => 'tweets#create'
+  # patch 'tweets/:id' => 'tweets#update'
+  # delete 'tweets/:id' => 'tweets#destroy' 
+  # get 'tweets/:id/edit' => 'tweets#edit', as:'edit_tweet'
 
   resources :tweets do
     resources :likes, only: [:create, :destroy]
-
     resources :comments, only: [:create]
+
+    collection do
+      get 'hashtag/:id', to: 'tweets#hashtag', as: 'hashtag'
+    end
   end   
 
 #   $ rails routes

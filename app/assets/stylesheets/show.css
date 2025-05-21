@@ -13,6 +13,15 @@
     max-width: 800px; /* 中央寄せのための最大幅 */
     padding: 20px;
 }
+.hashtag {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 10px;
+    background-color: #fcfefe;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #333;
+}
 .likeuser, .comment-wrapper {
     background-color: azure;
     border: 1px solid orange;

@@ -14,7 +14,7 @@
     <%# <span><%= tag.name</span>  %>
 <%# <% end %> 
       <% if @tweet.image.attached? %>
-        <%= image_tag @tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
+        <%= image_tag @tweet.image.variant(resize_to_limit: [400, 450]), size: '400x450' %>
       <% end %>
     </div>  
     <div class="tweetbody">
@@ -32,9 +32,15 @@
   <%# <% if hashtag.tweets.size > 0 %> 
   <% tweet_count = hashtag.tweets.size %>
   <% if tweet_count > 0 %>
+    <div class="hashtag">
     <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %> 
-    <%= "(#{hashtag.tweets.count})"%>
-    <%= "(#{tweet_count})" %> 
+    <%= link_to "##{hashtag.hashtag_name}", hashtag_tweets_path(hashtag_id: hashtag.id) %>
+      <%# <% hashtag.hashtag_name.split(/\s+/).each do |tag| %> 
+        <%# <span>#<%= tag %>
+      <%# <% end %>
+    <%# <%= "(#{hashtag.tweets.count})"%> 
+    <%# <%= "(#{tweet_count})" %> 
+    </div>
   <% end %> 
 <% end %>
 
@@ -64,6 +70,7 @@
         <% end %>
       <% end %>
     <% else %>
+      <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
       <%# <p>いいねの数 = </p> %>
       <%= @tweet.likes.count %>
     <% end %>
