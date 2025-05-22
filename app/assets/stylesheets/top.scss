@@ -49,7 +49,7 @@
 
 .tweets-wrapper {
   display: flex;
-  flex-wrap: wrap; /* 2列で折り返す */
+  flex-wrap: wrap; /* 列を折り返す */
   justify-content: center; /* 中心に集める */
   gap: 30px; /* カード同士の間隔 */
 }
@@ -64,9 +64,9 @@
   background: #ffffff;
   border-radius: 90px;
   transition: transform 0.3s ease;
-  width: 45%; /* カードの幅を45%くらいに */
-  min-width: 300px; /* 小さすぎないように最小幅を設定 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30%; /* 一行に３投稿になるように */
+  min-width: 250px; /* 小さすぎないように最小幅を設定 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   padding: 20px;
 }
 

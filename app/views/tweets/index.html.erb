@@ -55,11 +55,10 @@
     <%# <p><%= simple_format(t.body) %>
     <p class="limit-text" title="<%= h(t.body) %>"><%= truncate(t.body, length: 100) %></p>
       <% if t.image.attached? %>
-        <%= image_tag t.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
+        <%= image_tag t.image.variant(resize_to_limit: [250, 250]), size: '250x250' %>
         <%# 4/19 16:32 エラー解消のため %>
             <%# <%= image_tag t.image, size: '250x200'%>
       <% end %>
-
 <div class="like-container">
     <% if user_signed_in? %>
         <% if current_user.already_liked?(t) %>
@@ -90,7 +89,9 @@
       <p><%= link_to "投稿詳細へ", tweet_path(t.id) %> 
     
       <% if user_signed_in? && current_user.id == t.user_id %>
-      <%= link_to "編集する", edit_tweet_path(t.id) %>
+        <%= link_to edit_tweet_path(t.id) do%>
+          編集<i class="fa-solid fa-pencil"></i>
+        <% end %>
       </p>
       <%# <%= link_to "削除する", tweet_path(t.id), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false } %>
       <%# <%= link_to "削除する", tweet_path(t.id), method: :delete %> 

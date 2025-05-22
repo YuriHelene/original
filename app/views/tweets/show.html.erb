@@ -47,10 +47,10 @@
 
 <% if user_signed_in? && current_user.id == @tweet.user_id %>
   <%= link_to edit_tweet_path(@tweet.id) do%>
-    <i class="fa-solid fa-pencil"></i>編集
+    編集<i class="fa-solid fa-pencil"></i>
   <% end %>  
   <%= button_to tweet_path(@tweet), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false} do %>
-    <i class="fa-solid fa-trash"></i> 削除
+    削除<i class="fa-solid fa-trash"></i>
   <% end %>
 <% end %>
 

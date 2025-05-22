@@ -1,0 +1,27 @@
+.tweets-container {
+    display: flex;
+    flex-wrap: wrap;/* 折り返しを許可 */
+    gap: 20px; /* 投稿間の余白 */
+    justify-content: space-evenly;
+    margin-top: 20px;
+    padding:20px;
+    background-color: rgba(73, 150, 233, 0.29);
+}
+.tweet-card {
+    width: 30%;
+       /* ３つ並ぶように幅を調整（50%  - gap） */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.limit-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4; /* 最大4行 */
+    line-height: 1.5em;     /* 行の高さ調整（必要に応じて） */
+    max-height: 6em;        /* 1.5em × 4行 = 6em */
+}

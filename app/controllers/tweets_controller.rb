@@ -26,7 +26,7 @@ class TweetsController < ApplicationController
     end
 
     # 4/11追加
-    @tweets = @tweets.page(params[:page]).per(20)
+    @tweets = @tweets.page(params[:page]).per(24)
     # ページネーション
   end
 
@@ -70,7 +70,7 @@ class TweetsController < ApplicationController
 
   def hashtag
     @hashtag = Hashtag.find(params[:id])
-    @tweets = @hashtag.tweets.includes(:user, :likes).order(created_at: :desc).page(params[:page]).per(20)
+    @tweets = @hashtag.tweets.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc).page(params[:page]).per(24)
   end
 
   def update

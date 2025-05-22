@@ -1,13 +1,30 @@
+<%= stylesheet_link_tag 'hashtag', :media => "all" %>
+
 <h2>#<%= @hashtag.hashtag_name %> に関する投稿</h2>
 
-<% if @tweets.any? %>
-  <% @tweets.each do |tweet| %>
-    <div class="tweet">
-      <p><%= tweet.user.name %>：<%= tweet.body %></p>
+<div class="tweets-container">
+    <% if @tweets.any? %>
+    <% @tweets.each do |tweet| %>
+    <div class="tweet-card">
+        <p><%= tweet.user.name %>：<%= tweet.title %></p>
+        <p class="limit-text" title="<%= h(tweet.body) %>"><%= truncate(tweet.body, length: 100) %></p>
+        <% if tweet.image.attached? %>
+            <%= image_tag tweet.image.variant(resize_to_limit: [250, 200]), size: '250x200' %>
+        <% end %>
+
+        <p><%= link_to tweet.user.name, user_path(tweet.user.id) %>
+            <%= tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
+            <p><%= link_to "投稿詳細へ", tweet_path(tweet.id) %> 
+            <% if user_signed_in? && current_user.id == tweet.user_id %>
+            <%= link_to edit_tweet_path(tweet.id) do%>
+            編集<i class="fa-solid fa-pencil"></i>
+            <% end %></p>
+        <% end %>
     </div>
-  <% end %>
-<% else %>
-  <p>このタグに紐づくツイートはありません。</p>
-<% end %>
+    <% end %>
+</div>
+    <% else %>
+    <p>このタグに紐づくツイートはありません。</p>
+    <% end %>
 
 <%= paginate @tweets %>

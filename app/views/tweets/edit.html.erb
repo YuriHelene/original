@@ -14,6 +14,7 @@
   <h2>ハッシュタグ</h2>
     <p>現在のタグ: <%= @tweet.hashtags.map(&:hashtag_name).join(" ") %></p>
     <%= f.text_field :hashtag_name, value: @tweet.hashtags.map(&:hashtag_name).join(" "), placeholder: "夕焼け 虹 朝" %>
+    <p>*半角スペースを入力すると複数のタグを付けることができます。</p> 
   </div>
 <%# <% end %> 
 
