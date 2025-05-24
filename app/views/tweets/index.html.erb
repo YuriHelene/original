@@ -1,5 +1,6 @@
 <%# 投稿一覧ページ %>
 <%= stylesheet_link_tag 'index', :media => "all" %>
+<div class="showback-visual" style="background-image: url(<%= asset_path('bg-show1.avif') %>);">
 
 <%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
 <div class=else>
@@ -11,7 +12,7 @@
 
 <%# <h4>投稿を検索</h4> %>
 <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
-  <%= text_field_tag :search %>
+  <%= text_field_tag :search, params[:search], placeholder: "キーワードを入力" %>
   <%= submit_tag '検索する' ,class: "button-search" %>
 <% end %>
 
@@ -89,7 +90,7 @@
       <p><%= link_to "投稿詳細へ", tweet_path(t.id) %> 
     
       <% if user_signed_in? && current_user.id == t.user_id %>
-        <%= link_to edit_tweet_path(t.id) do%>
+        <%= link_to edit_tweet_path(t.id), class: "edit-button" do%>
           編集<i class="fa-solid fa-pencil"></i>
         <% end %>
       </p>

@@ -1,36 +1,41 @@
 <%# 投稿ページ %>
 <%= stylesheet_link_tag 'new', :media => "all" %>
 
-<div class="post-container">
-<h3>新規投稿</h3>
-<%= form_for @tweet do |f| %>
-  <div class="field">
-    <p><%= f.label :"タイトル" %></p>
-    <%= f.text_field :title, class: "input-title", size: 140 %>
-    <p><%= f.label :"↓投稿内容↓" %></p>
-    <%= f.text_area :body, class: "input-body", size: 140 %>
-    <p><%= f.label :画像 %></p>
-    <%= f.file_field :image %>
+<div class="back-visual" style="background-image: url(<%= asset_path('bg-new1.png') %>);">
+
+  <div class="main-container">
+    <div class="post-container">
+      <h3>新規投稿</h3>
+      <%= form_for @tweet do |f| %>
+        <div class="field">
+          <p><%= f.label :"タイトル" %></p>
+          <%= f.text_field :title, class: "input-title", size: 140 %>
+          <p><%= f.label :"↓投稿内容↓" %></p>
+          <%= f.text_area :body, class: "input-body", size: 140 %>
+          <p><%= f.label :画像 %></p>
+          <%= f.file_field :image %>
+        </div>
+
+        <%# <div class='form-group'> %>
+            <%# <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+                <%# <div class='form-check'> %>
+                    <%# <%= tag.label class: 'form-check-label' do %> 
+                        <%# <%= tag.check_box class: 'form-check-input' %> 
+                        <%# <%= tag.text %>
+                    <%# <% end %>
+                <%# </div> %>
+            <%# <% end %> 
+        <%# </div> %>
+
+        <%# <%= form_with(model: @tweet, url: tweets_path, local: true) do |f| %>
+        <p>*半角スペースを入力すると複数のタグを付けることができます。<br>
+        <%= f.text_field :hashtag_name, placeholder: "夕焼け 虹 朝" %></p>
+
+        <%= f.submit "投稿する", class: "button" %>
+
+      <% end %>
+      <%# <%= link_to 'トップページへ', :controller => "hello", :action => "top" %>
+      <%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %>
+    </div>
   </div>
-
-  <%# <div class='form-group'> %>
-      <%# <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-          <%# <div class='form-check'> %>
-              <%# <%= tag.label class: 'form-check-label' do %> 
-                  <%# <%= tag.check_box class: 'form-check-input' %> 
-                  <%# <%= tag.text %>
-              <%# <% end %>
-          <%# </div> %>
-      <%# <% end %> 
-  <%# </div> %>
-
-  <%# <%= form_with(model: @tweet, url: tweets_path, local: true) do |f| %>
-    <p>半角スペースを入力すると複数のタグを付けることができます。</p>
-  <%= f.text_field :hashtag_name, placeholder: "夕焼け 虹 朝" %>
-
-<%= f.submit "投稿する", class: "button" %>
-
-<% end %>
-<%# <%= link_to 'トップページへ', :controller => "hello", :action => "top" %>
-<%= link_to '投稿一覧ページへ', :controller => "tweets", :action => "index" %>
 </div>

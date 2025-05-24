@@ -1,9 +1,81 @@
+.showback-visual {
+    background: linear-gradient(to bottom, #a0e9ff, #ffffff);
+    min-height: 100vh;
+    padding: 2rem;
+    /* background-repeat: no-repeat; */
+}
 .tweetshow {
     display: flex;
     justify-content: center;
 }
 .image{
+    padding-top: 40px;
     padding-right: 200px;
+}
+.action-buttons {
+    display: flex;
+    gap: 1rem; /* ボタン間のスペース */
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+  /* 編集ボタンの色も少し変えておしゃれに */
+.edit-button {
+    background: linear-gradient(135deg, #c0ffec, #e0ffee);
+    color: #00a62c;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 8px rgba(0, 150, 200, 0.2);
+    transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+    background: linear-gradient(135deg, #a6e8ff, #d6f7ff);
+}
+/* 共通ボタンスタイル */
+.sky-button {
+    background: linear-gradient(135deg, #a0e9ff, #d0f0ff);
+    color: #004c6d;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 8px rgba(0, 150, 200, 0.2);
+    transition: all 0.3s ease;
+}
+.sky-button:hover {
+    background: linear-gradient(135deg, #8ddfff, #b8efff);
+    box-shadow: 0 6px 12px rgba(0, 150, 200, 0.3);
+}
+/* 削除ボタンは色を変える */
+.delete-button {
+    background: linear-gradient(135deg, #ffd6d6, #ffecec);
+    color: #c20e0e;
+    padding: 0.3rem 0.6rem;
+}
+
+.delete-button:hover {
+    background: linear-gradient(135deg, #ffb3b3, #ffdada);
+}
+
+  /* いいねボタン内のハート画像調整 */
+.heart_likes {
+    width: 20px;
+    height: 20px;
 }
 .showlike-comment{
     display: flex;

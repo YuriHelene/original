@@ -1,5 +1,24 @@
+/* .back-visual {
+    background-image: url('/assets/bg-mypage2.jpeg'); 
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* padding-bottom: 20px; ← これを追加 */
+    /* background-repeat: no-repeat; */
+    /* background-attachment: fixed;   */
+    /* image-rendering: auto;       スクロールしても背景を固定（任意） */
+/* } */ 
+.back-visual {
+    background-image: url('/assets/bg-mypage2.jpeg'); 
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    /* min-height: 100vh; 画面の高さ全体を覆う */
+    position: relative;
+    padding-top: 10px; /* 上部に余白ができて背景が反映されやすくなる */
+    image-rendering: auto; 
+}
 body {
-    background: linear-gradient(to bottom, #cceeff, #ffffff);
+    background:  #ffffff;
     font-family: "Helvetica Neue", sans-serif;
     color: #333;
     margin-top: 30px;

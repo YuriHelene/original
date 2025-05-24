@@ -11,7 +11,7 @@
     height: 650px;
     width: 45%;
     color: white;
-    background: #67a7e7;
+    background: #f1b97a;
     border-radius: 140px;
     margin: 20px 5px;
     padding: 20px 40px;
@@ -23,6 +23,7 @@ h2{
     margin-top: 50px;
     color: aliceblue;
 }
+
 .field label {
     font-weight: 100;
     font-size: 15px;
@@ -31,7 +32,7 @@ h2{
     border-style: none;
     width: 250px;
     height: 30px;
-    background: #9bccfe;
+    background: #f5a953;
     border-radius: 10px;
     border: 1px #060339 solid;
     } 
@@ -40,7 +41,7 @@ h2{
     border-style: none;
     width: 250px;
     height: 30px;
-    background: #9bccfe;
+    background: #f5a953;
     border-radius: 10px;
     border: 1px #060339 solid;
     } 
@@ -50,12 +51,12 @@ h2{
     width: 150px;
     height: 25px;
     font-size: 15px;
-    background: #5ba2f4f3;
+    background: #f37121f3;
     border-radius: 10px;
     border: 1px #ebf0f9 solid;
     } 
     
 .actions input[type="submit"]:hover {
     cursor: pointer;
-    background: linear-gradient(to bottom,#1c94ea,#5ba2f4f3);
+    background: linear-gradient(to bottom,#ea501c,#f6b08af3);
     }

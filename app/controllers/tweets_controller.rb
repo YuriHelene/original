@@ -3,18 +3,27 @@ class TweetsController < ApplicationController
   # ログインしないと投稿を見れなくする仕組み
 
   def index
-    @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc)
     # @hashtag_list = Hashtag.all              #ビューでタグ一覧を表示するために全取得。
     @tweet_hashtags = Hashtag.includes(:tweets).all
     @hashtag_list = Hashtag.joins(:tweets).group('hashtags.id').having('COUNT(tweets.id) > 0')    # 教材7-2
-    # @tweets = Tweet.all
-    # search = params[:search]
-    # @tweets = @tweets.joins(:user).where("body LIKE ?", "%#{search}%") if search.present?
-    if params[:search].present?
-      @tweets = Tweet.where("body LIKE ?", "%" + params[:search] + "%")
-    else
-      @tweets = Tweet.all
+    
+    @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes).order(created_at: :desc)
 
+    # if params[:search].present?
+      # @tweets = Tweet.where("body LIKE ?", "%" + params[:search] + "%")
+    # else
+      # @tweets = Tweet.all
+
+    if params[:search].present?
+      keyword = "%#{params[:search]}%"
+      @tweets = Tweet.left_joins(:hashtags) # left_joinsでタグがない投稿も拾える
+                .includes(:user, :image_attachment, :image_blob, :likes)
+                .where("tweets.title LIKE :kw OR tweets.body LIKE :kw OR hashtags.hashtag_name LIKE :kw", kw: keyword)
+                .distinct
+    else
+      @tweets = Tweet.includes(:user, :image_attachment, :image_blob, :likes)
+    end  
+    
     @tweets = case params[:sort]
               when 'old'
                 Tweet.oldest
@@ -22,8 +31,7 @@ class TweetsController < ApplicationController
                 Tweet.most_liked
               else
                 Tweet.latest
-              end
-    end
+  end
 
     # 4/11追加
     @tweets = @tweets.page(params[:page]).per(24)

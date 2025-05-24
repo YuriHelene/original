@@ -1,4 +1,7 @@
 <%= stylesheet_link_tag 'edit', :media => "all" %>
+
+<div class="back-visual" style="background-image: url(<%= asset_path('bg-proedit1.jpg') %>);">
+
 <h3>投稿編集</h3>
 
 <div class="post-container">
@@ -6,10 +9,20 @@
 <div class="field">
   <h2><%= f.label :タイトル %></h2>
   <%= f.text_field :title,class: "input-title", :size => 140 %> 
+  
   <h2><%= f.label :投稿内容 %></h2>
   <%= f.text_area :body, class: "input-body", :size => 140 %> 
+  
   <h2><%= f.label :画像 %></h2>
-    <%= f.file_field :image %>
+  <% if @tweet.image.attached? %>
+  <p>現在の画像:</p>
+  <div class="current-image">
+    <%= image_tag @tweet.image.variant(resize_to_limit: [250, 250]), class: "current-image-preview" %>
+  </div>
+  <% else %>
+    <p>画像は未設定です</p>
+  <% end %>
+  <%= f.file_field :image %>
 
   <h2>ハッシュタグ</h2>
     <p>現在のタグ: <%= @tweet.hashtags.map(&:hashtag_name).join(" ") %></p>

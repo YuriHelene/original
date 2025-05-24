@@ -1,112 +1,120 @@
 <%# 投稿詳細ページ %>
 <%= stylesheet_link_tag 'show', :media => "all" %>
-
+<div class="showback-visual" style="background-image: url(<%= asset_path('bg-show1.avif') %>);">
 <%# <% if user_signed_in? %>
   <%# <%= link_to "マイページへ", user_path(current_user.id) %> 
 <%# <% end %>
+  <div class="main-container">
+    <h2>投稿詳細</h2>
+    <div class="tweet">
+      <div class="tweetshow">
+        <div class="image">
+          <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
+    <%# <% @tweet.tags.each do |tag| %>
+        <%# <span><%= tag.name</span>  %>
+    <%# <% end %> 
+          <% if @tweet.image.attached? %>
+            <%= image_tag @tweet.image.variant(resize_to_limit: [450, 450]), size: '450x450' %>
+          <% end %>
+        </div>  
+        <div class="tweetbody">
+          <h2><%= @tweet.title %></h2>
+          <p><%= simple_format(@tweet.body) %></p>
+        </div>
+      </div>
 
-<h2>投稿詳細</h2>
-<div class="tweet">
-  <div class="tweetshow">
-    <div class="image">
-      <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> <%# @tweet?%>
-<%# <% @tweet.tags.each do |tag| %>
-    <%# <span><%= tag.name</span>  %>
-<%# <% end %> 
-      <% if @tweet.image.attached? %>
-        <%= image_tag @tweet.image.variant(resize_to_limit: [400, 450]), size: '400x450' %>
+      <p>投稿日時<%= @tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
+    <% if @tweet.created_at != @tweet.updated_at %>
+      <p>更新日時<%= @tweet.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
+    <% end %>
+
+    <% @tweet_hashtags.each do |hashtag| %>
+      <% if hashtag.tweets.size > 0 %>
+      <% tweet_count = hashtag.tweets.size %>
+      <% if tweet_count > 0 %>
+        <div class="hashtag">
+        <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %>
+        <%= link_to "##{hashtag.hashtag_name}", hashtag_tweets_path(hashtag.id) %>
+          <%# <% hashtag.hashtag_name.split(/\s+/).each do |tag| %>
+            <%# <span><%= tag %>
+          <% end %>
+        <%= "(#{hashtag.tweets.count})"%> 
+        <%# <%= "(#{tweet_count})" %> 
+        </div>
+      <% end %> 
+    <% end %>
+
+
+    <% if user_signed_in? && current_user.id == @tweet.user_id %>
+    <div class="action-buttons">
+      <%= link_to edit_tweet_path(@tweet.id), class: "edit-button" do%>
+        編集<i class="fa-solid fa-pencil"></i>
+      <% end %>  
+      <%= button_to tweet_path(@tweet), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false}, class: "sky-button delete-button" do %>
+        削除<i class="fa-solid fa-trash"></i>
       <% end %>
-    </div>  
-    <div class="tweetbody">
-      <h2><%= @tweet.title %></h2>
-      <p><%= simple_format(@tweet.body) %></p>
-    </div>
-  </div>
+      </div>
+    <% end %>
 
-  <p>投稿日時<%= @tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
-<% if @tweet.created_at != @tweet.updated_at %>
-  <p>更新日時<%= @tweet.updated_at.strftime('%Y/%m/%d %H:%M:%S') %></p>
-<% end %>
+    <div class="userlike-comment">
+      <% if user_signed_in? %>
+          <% if current_user.already_liked?(@tweet) %>
+            <%= button_to tweet_like_path(@tweet), method: :delete, class: "sky-button like-button" do %>
+              <%# <p>いいねを取り消す %>
+              </p><%= @tweet.likes.count %>
+            <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
+          <% end %>
+          <% else %>
+            <%= button_to tweet_likes_path(@tweet), method: :post, class: "sky-button like-button" do %>
+            <%= image_tag asset_path('heart_pre.png'), class: 'heart_likes' %>
+            <%# <p>いいね</p> %>
+            <%= @tweet.likes.count %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
+          <%# <p>いいねの数 = </p> %>
+          <%= @tweet.likes.count %>
+        <% end %>
 
-<% @tweet_hashtags.each do |hashtag| %>
-  <%# <% if hashtag.tweets.size > 0 %> 
-  <% tweet_count = hashtag.tweets.size %>
-  <% if tweet_count > 0 %>
-    <div class="hashtag">
-    <%# <%= link_to hashtag.hashtag_name, hashtag_tweets_path(hashtag_id: hashtag.id) %> 
-    <%= link_to "##{hashtag.hashtag_name}", hashtag_tweets_path(hashtag_id: hashtag.id) %>
-      <%# <% hashtag.hashtag_name.split(/\s+/).each do |tag| %> 
-        <%# <span>#<%= tag %>
-      <%# <% end %>
-    <%# <%= "(#{hashtag.tweets.count})"%> 
-    <%# <%= "(#{tweet_count})" %> 
-    </div>
-  <% end %> 
-<% end %>
-
-
-<% if user_signed_in? && current_user.id == @tweet.user_id %>
-  <%= link_to edit_tweet_path(@tweet.id) do%>
-    編集<i class="fa-solid fa-pencil"></i>
-  <% end %>  
-  <%= button_to tweet_path(@tweet), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false} do %>
-    削除<i class="fa-solid fa-trash"></i>
-  <% end %>
-<% end %>
-
-<div class="userlike-comment">
-  <% if user_signed_in? %>
-      <% if current_user.already_liked?(@tweet) %>
-        <%= button_to tweet_like_path(@tweet), method: :delete do %>
-          <%# <p>いいねを取り消す %>
-          </p><%= @tweet.likes.count %>
-        <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
-      <% end %>
-      <% else %>
-        <%= button_to tweet_likes_path(@tweet), method: :post do %>
-        <%= image_tag asset_path('heart_pre.png'), class: 'heart_likes' %>
-        <%# <p>いいね</p> %>
-        <%= @tweet.likes.count %>
+    <% if user_signed_in? %>
+        <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
+          <%= f.text_area :content %>
+          <%= button_tag type: "submit" do %>
+            <i class="far fa-comments"></i> コメントする
+          <% end %>
         <% end %>
       <% end %>
-    <% else %>
-      <%= image_tag asset_path('heart_likes.png'), class: 'heart_likes' %>
-      <%# <p>いいねの数 = </p> %>
-      <%= @tweet.likes.count %>
-    <% end %>
+    </div>
 
-<% if user_signed_in? %>
-    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
-      <%= f.text_area :content %>
-      <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> コメントする
-      <% end %>
-    <% end %>
-  <% end %>
-</div>
+    <div class="showlike-comment">
+      <div class="likeuser">
+          <h4>いいねしたユーザー</h4>
+          <% @tweet.liked_users.each do |user| %>
+            <li><%= user.name %></li>
+          <% end %>
+      </div>    
 
-<div class="showlike-comment">
-  <div class="likeuser">
-      <h4>いいねしたユーザー</h4>
-      <% @tweet.liked_users.each do |user| %>
-        <li><%= user.name %></li>
-      <% end %>
-  </div>    
-
-  <div class="comment-wrapper">
-    <h4>コメント一覧</h4>
-    <% @comments.each do |c| %>
-      <div>
-        <%= link_to @tweet.user.name, user_path(@tweet.user.id) %> 
-        <%# <%= c.user.name unless c.user.blank? %> 
-        <br>
-        <%= c.content %>
+      <div class="comment-wrapper">
+        <h4>コメント一覧</h4>
+        <% @comments.each do |c| %>
+          <div class="comment-item">
+            <% if c.user.present? %>
+              <%= link_to c.user.name, user_path(c.user.id) %> 
+            <%# <%= c.user.name unless c.user.blank? %> 
+            <% else %>
+              <span>ゲストユーザー</span>
+            <% end %>
+            <br>
+            <%= c.content %>
+          </div>
+            <br>
+        <% end %>
       </div>
-        <br>
-    <% end %>
-  </div>
-</div>  
+    </div>  
 
-<%# <%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
-<%# <%= link_to "投稿一覧に戻る", tweets_path %> 
+    <%# <%= link_to '新規投稿ページへ', :controller => "tweets", :action => "new" %>
+    <%# <%= link_to "投稿一覧に戻る", tweets_path %> 
+    </div>
+  </div>
 </div>

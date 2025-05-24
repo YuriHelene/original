@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag 'users_registrations_edit', :media => "all" %>
+<div class="showback-visual" style="background-image: url(<%= asset_path('bg-proedit1.jpg') %>);">
 
 <div class="blank1">
   <div class="blank2">
@@ -8,16 +9,17 @@
         <%= render "users/shared/error_messages", resource: resource %>
 
       <!-- ▼この部分を追加：プロフィール画像アップロード＋Cropperプレビュー -->
-        <div class="field">
-          <%= f.label :icon, "プロフィール画像" %><br>
-          <%= f.file_field :icon, id: "icon_input" %>
-          <br>
-          <div>
-            <img id="icon_preview" style="max-width: 300px; border-radius: 50%; object-fit: cover;" />
-          </div>
-          <br>
-          <%= button_tag "トリミングして保存", id: "crop_and_upload", type: "button" %>
-        </div>
+        <%# <div class="field"> %>
+          <%# <%= f.label :icon, "プロフィール画像" %>
+          <%# <br> %>
+          <%# <%= f.file_field :icon, id: "icon_input" %> 
+          <%# <br> %>
+          <%# <div> %>
+            <%# <img id="icon_preview" style="max-width: 300px; border-radius: 50%; object-fit: cover;" /> %>
+          <%# </div> %>
+          <%# <br> %>
+          <%# <%= button_tag "トリミングして保存", id: "crop_and_upload", type: "button" %> 
+        <%# </div> %>
         <!-- ▲ここまで追加 -->
 
       <!--アカウント編集時に名前を入力できるようにフォームを追加-->

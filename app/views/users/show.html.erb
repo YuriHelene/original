@@ -1,5 +1,8 @@
 <%= stylesheet_link_tag 'users_show', :media => "all" %>
 
+<div class="back-visual">
+
+
 <h1><%= @user.name %>ページ</h1>
 <section class="profile">
 <h2>投稿者プロフィール</h2>
@@ -67,3 +70,4 @@
 <%= page_entries_info @liked_tweets %>
 <%= paginate @liked_tweets, param_name: :liked_page %>  <!-- ← ここもparam_nameを指定！ -->
 </section>
+</div>

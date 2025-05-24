@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/218877d811.js" crossorigin="anonymous"></script>
+ 
   </head>
 
   <body>
@@ -27,7 +28,7 @@
 
         <% if user_signed_in? %>
           <li><%= link_to "マイページ", user_path(current_user.id) %></li>
-          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-link" %></li>
         <% else %>
         <%# <li><%= link_to "マイページ", user_path(current_user.id) %></li> 
           <li><%= link_to "ログイン", new_user_session_path %></li>
@@ -39,9 +40,9 @@
     <main>
       <%= yield %>
     </main>
-    <%# <footer>
+    <footer>
       <p>Copyright © helene All Rights Reserved.</p>
-    </footer> %>
+    </footer>
 
   </body>
 </html>

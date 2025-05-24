@@ -9,6 +9,15 @@
 /* .else{
     background-color:#FFC666;
 } */
+.back-visual {
+    /* background-size: cover; */
+    background-position: center;
+    padding-bottom: 20px; /* ← これを追加 */
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    image-rendering: auto;       /* スクロールしても背景を固定（任意） */
+}
+
 h3 {
     white-space: nowrap;
     position: center;
@@ -84,6 +93,26 @@ b{
 .heart_likes:hover {
     transform: scale(1.1);
 
+}
+.edit-button {
+    background: linear-gradient(135deg, #c0ffdb, #e0ffee);
+    color: #333433;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 8px rgba(0, 150, 200, 0.2);
+    transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+    background: linear-gradient(135deg, #a6e8ff, #d6f7ff);
 }
 .top-btn {
     position:   fixed;

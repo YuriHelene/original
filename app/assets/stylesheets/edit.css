@@ -1,10 +1,10 @@
 .post-container {
     margin: 50px auto;
     width: 50%;
-    border: solid #d3def1;
+    border: solid #ef6742;
     border-radius: 10px;
     text-align: center;
-    background-color: rgba(73, 150, 233, 0.29);
+    background-color: rgba(245, 225, 98, 0.29);
 }
 h3 {
     white-space: nowrap;
@@ -18,7 +18,7 @@ h3 {
     width: 80%;
     height: 40px;
     margin-bottom: 10px;
-    border: 2px solid #4da6ff;
+    border: 2px solid #f1b97a;
     padding: 5px;
     font-size: 16px;
     background-color: #f0f8ff;
@@ -33,13 +33,14 @@ h3 {
     font-size: 16px;
     background-color: #fffaf0;
 }
+
 input[type="submit"] {
-    /* width: 200px;
+    width: 200px;
     font-size: 20px;
     margin-top: 50px;
     margin-bottom: 30px;
 }
-.button { */
+.button { 
     display       : inline-block;
     border-radius : 50%;          /* 角丸       */
     font-size     : 15pt;        /* 文字サイズ */
@@ -47,11 +48,11 @@ input[type="submit"] {
     cursor        : pointer;     /* カーソル   */
     padding       : 5px 40px;   /* 余白       */
     color         : #ffffff;     /* 文字色     */
-    background    : rgba(71, 141, 211, 0.99);     /* 背景色     */
+    background    : #f87828;     /* 背景色     */
     line-height   : 1em;         /* 1行の高さ  */
     transition    : .3s;         /* なめらか変化 */
     box-shadow    : 1px 1px #666666;  /* 影の設定 */
-    border        : 2px solid rgba(77, 166, 255, 0.99);    /* 枠の指定 */
+    border        : 2px solid #f08811;    /* 枠の指定 */
 }
 .button:hover {
     box-shadow    : none;        /* カーソル時の影消去 */
