@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get 'hashtag/:id', to: 'tweets#hashtag', as: 'hashtag'
     end
   end   
+  resources :comments, only: [:destroy]
 
 #   $ rails routes
 # Prefix       Verb      URI Pattern                   Controller#Action

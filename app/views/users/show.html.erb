@@ -65,6 +65,7 @@
     <% if t.image.attached? %>
       <%= image_tag t.image.variant(resize_to_limit: [250, 200]), size: '250x200', class: "liked-tweets-image" %>
     <% end %>
+      <%= link_to "投稿詳細へ", tweet_path(t.id) %> 
   </div>
 <% end %>
 <%= page_entries_info @liked_tweets %>

@@ -102,6 +102,12 @@
             <% if c.user.present? %>
               <%= link_to c.user.name, user_path(c.user.id) %> 
             <%# <%= c.user.name unless c.user.blank? %> 
+            <% if user_signed_in? && current_user.id == c.user_id %>
+              <%= button_to comment_path(c), method: :delete, data: { confirm: "本当に削除しますか？", turbo: false }, class: "sky-button delete-button" do %>
+              削除
+              <% end %>
+            <% end %>
+
             <% else %>
               <span>ゲストユーザー</span>
             <% end %>

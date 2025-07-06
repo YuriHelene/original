@@ -15,6 +15,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.user == current_user
+      @comment.destroy
+      redirect_back fallback_location: root_path, notice: "コメントを削除しました"
+    else
+      redirect_back fallback_location: root_path, alert: "削除権限がありません"
+    end
+  end
+
   private
 
     def comment_params
