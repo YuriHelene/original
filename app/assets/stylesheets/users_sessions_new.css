@@ -1,4 +1,4 @@
-.blank1{
+.blank3{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     min-height: 88vh;  /* 画面全体の高さを埋める */
     } 
     
-.blank2{
+.blank4{
     text-align: center;
     height: 400px;
     width: 45%;
@@ -16,7 +16,7 @@
     margin: 20px 5px;
     padding: 20px 40px;
     } 
-.blank2 a{
+.blank4 a{
     color:#ffffff;
     } 
 h2{
@@ -24,11 +24,11 @@ h2{
     color: aliceblue;
 }
 
-.field label {
+.field1 label {
     font-weight: 100;
     font-size: 15px;
     } 
-.field input[type="email"] {
+.field1 input[type="email"] {
     border-style: none;
     width: 250px;
     height: 30px;
@@ -37,7 +37,7 @@ h2{
     border: 1px #060339 solid;
     } 
     
-.field input[type="password"] {
+.field1 input[type="password"] {
     border-style: none;
     width: 250px;
     height: 30px;
@@ -46,7 +46,7 @@ h2{
     border: 1px #060339 solid;
     } 
     
-.actions input[type="submit"] {
+.actions1 input[type="submit"] {
     border-style: none;
     width: 150px;
     height: 25px;
@@ -56,7 +56,7 @@ h2{
     border: 1px #ebf0f9 solid;
     } 
     
-.actions input[type="submit"]:hover {
+.actions1 input[type="submit"]:hover {
     cursor: pointer;
     background: linear-gradient(to bottom,#1c94ea,#5ba2f4f3);
     }
